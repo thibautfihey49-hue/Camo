@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- ✅ Permission pour lire l'IP -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +17,6 @@
         android:icon="@android:drawable/ic_menu_camera"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 
-        <!-- ✅ ACTIVITÉ VISIBLE DANS LE LANCEUR -->
         <activity
             android:name=".MainActivity"
             android:exported="true">

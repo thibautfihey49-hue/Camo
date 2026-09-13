@@ -6,17 +6,66 @@
     android:padding="24dp"
     android:gravity="center_horizontal"
     android:background="#121212">
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="Camo" android:textSize="32sp" android:textColor="#FFFFFF" android:layout_marginBottom="30dp"/>
-    <TextView android:id="@+id/statusText" android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="Initialisation..." android:textSize="14sp" android:textColor="#B0B0B0" android:gravity="center"
-        android:padding="16dp" android:background="#1E1E1E" android:layout_marginBottom="30dp"/>
-    <Button android:id="@+id/btnStart" android:layout_width="match_parent" android:layout_height="55dp"
-        android:text="Démarrer le streaming" android:backgroundTint="#4CAF50" android:textColor="#FFFFFF"
-        android:textSize="16sp" android:layout_marginBottom="12dp"/>
-    <Button android:id="@+id/btnStop" android:layout_width="match_parent" android:layout_height="55dp"
-        android:text="Arrêter" android:backgroundTint="#F44336" android:textColor="#FFFFFF" android:textSize="16sp"/>
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="\n📡 Commandes à distance :\nDémarrer : am broadcast -a com.camo.app.START_STREAM -p com.camo.app\nArrêter :  am broadcast -a com.camo.app.STOP_STREAM -p com.camo.app\nFlux : http://[IP]:8080"
-        android:textSize="11sp" android:textColor="#888888" android:gravity="center" android:layout_marginTop="20dp"/>
+
+    <TextView 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:text="📹 Camo" 
+        android:textSize="32sp" 
+        android:textColor="#FFFFFF" 
+        android:layout_marginBottom="5dp"/>
+
+    <!-- ✅ IP AFFICHÉE EN HAUT -->
+    <TextView 
+        android:id="@+id/ipText"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="📡 IP : Recherche..." 
+        android:textSize="18sp" 
+        android:textColor="#4CAF50" 
+        android:gravity="center"
+        android:padding="12dp" 
+        android:background="#1E1E1E" 
+        android:layout_marginBottom="25dp"/>
+
+    <TextView 
+        android:id="@+id/statusText" 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="Initialisation..." 
+        android:textSize="15sp" 
+        android:textColor="#B0B0B0" 
+        android:gravity="center"
+        android:padding="20dp" 
+        android:background="#1E1E1E" 
+        android:layout_marginBottom="30dp"/>
+
+    <Button 
+        android:id="@+id/btnStart" 
+        android:layout_width="match_parent" 
+        android:layout_height="60dp"
+        android:text="🟢 Démarrer le streaming" 
+        android:backgroundTint="#4CAF50" 
+        android:textColor="#FFFFFF"
+        android:textSize="17sp" 
+        android:layout_marginBottom="12dp"/>
+
+    <Button 
+        android:id="@+id/btnStop" 
+        android:layout_width="match_parent" 
+        android:layout_height="60dp"
+        android:text="🔴 Arrêter" 
+        android:backgroundTint="#F44336" 
+        android:textColor="#FFFFFF" 
+        android:textSize="17sp"/>
+
+    <TextView 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="\n📡 Commandes à distance :\nDémarrer : am broadcast -a com.camo.app.START_STREAM -p com.camo.app\nArrêter :  am broadcast -a com.camo.app.STOP_STREAM -p com.camo.app"
+        android:textSize="11sp" 
+        android:textColor="#666666" 
+        android:gravity="center" 
+        android:layout_marginTop="25dp"/>
+
 </LinearLayout>
