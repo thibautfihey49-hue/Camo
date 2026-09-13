@@ -12,7 +12,7 @@ class RemoteTriggerReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         context ?: return
-        val action = intent?.action ?: return  // ✅ val en lecture seule, pas de réassignation
+        val action = intent?.action ?: return
 
         when (action) {
             "com.camo.app.START_STREAM" -> {
