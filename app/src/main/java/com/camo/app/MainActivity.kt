@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         val btnCopy: Button = findViewById(R.id.btnCopy)
         val btnWatch: Button = findViewById(R.id.btnWatch)
 
-        // Génère un code unique dès l'ouverture
         roomCode = genererCode()
         codeText.text = "🔑 $roomCode"
 
@@ -50,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Génère un code simple comme VDO.Ninja
     private fun genererCode(): String {
         val mots = listOf("bleu", "soleil", "lune", "vent", "mer", "neige", "feu", "roche", "nuage", "riviere")
         val mot1 = mots.random()
@@ -59,31 +57,28 @@ class MainActivity : AppCompatActivity() {
         return "$mot1-$mot2-$chiffres"
     }
 
-    // Ouvre la caméra dans VDO.Ninja avec le code
     private fun ouvrirCamera() {
         val url = "https://vdo.ninja/?room=$roomCode&push&label=Camera"
         val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url))
         startActivity(intent)
-        statusText.text = "✅ Caméra en ligne !\nPartage ce code : $roomCode"
+        statusText.text = "✅ Caméra en ligne !\nPartage : $roomCode"
     }
 
-    // Ouvre la page pour REGARDER
     private fun ouvrirVisionneur() {
         val url = "https://vdo.ninja/?room=$roomCode&view"
         val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url))
         startActivity(intent)
     }
 
-    // Copie le code dans le presse-papiers
     private fun copierCode() {
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("Code", roomCode)
         clipboard.setPrimaryClip(clip)
-        Toast.makeText(this, "✅ Code copié ! Partage-le !", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "✅ Code copié !", Toast.LENGTH_SHORT).show()
     }
 
     private fun verifierPermission(): Boolean {
-        return ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == android.content.pm.PackageManager.PERMISSION_GRANTED
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun demanderPermission() {

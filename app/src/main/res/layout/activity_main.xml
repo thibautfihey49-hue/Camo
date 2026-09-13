@@ -24,7 +24,6 @@
         android:textColor="#666666" 
         android:layout_marginBottom="45dp"/>
 
-    <!-- LE CODE — EN GRAND -->
     <TextView 
         android:id="@+id/codeText"
         android:layout_width="match_parent" 
@@ -42,7 +41,7 @@
         android:id="@+id/statusText"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content"
-        android:text="1. Clique sur Démarrer\n2. Partage le code\n3. L'autre entre le code sur vdo.ninja" 
+        android:text="1. Clique Démarrer\n2. Partage le code\n3. Sur vdo.ninja/?room=CODE" 
         android:textSize="15sp" 
         android:textColor="#AAAAAA" 
         android:gravity="center"
@@ -78,15 +77,5 @@
         android:backgroundTint="#7B1FA2" 
         android:textColor="#FFFFFF"
         android:textSize="16sp"/>
-
-    <TextView 
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content"
-        android:text="\n💡 Partage ce code :\nvdo.ninja/?room=bleu-soleil-42\n→ Pas de compte, pas d'inscription, instantané !"
-        android:textSize="13sp" 
-        android:textColor="#555555" 
-        android:gravity="center"
-        android:layout_marginTop="40dp"
-        android:lineSpacingExtra="4dp"/>
 
 </LinearLayout>
