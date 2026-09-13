@@ -79,11 +79,10 @@ class CameraStreamService : Service() {
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID, "Camo Service", NotificationManager.IMPORTANCE_LOW).apply {
-                setShowBadge(false)
-                enableVibration(false)
-                setSound(null, null)
-            }
+            val channel = NotificationChannel(CHANNEL_ID, "Camo Service", NotificationManager.IMPORTANCE_LOW)
+            channel.setShowBadge(false)
+            channel.enableVibration(false)
+            channel.setSound(null, null)
             val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             nm.createNotificationChannel(channel)
         }
@@ -170,7 +169,7 @@ class CameraStreamService : Service() {
                 if (frame != null) {
                     output.write("--$boundary\r\n".toByteArray())
                     output.write("Content-Type: image/jpeg\r\n".toByteArray())
-                    output.write("Content-Length: ${frame.size}\r\n\r\n".toByteArray())
+                    output.write(("Content-Length: " + frame.size + "\r\n\r\n").toByteArray())
                     output.write(frame)
                     output.write("\r\n".toByteArray())
                 }

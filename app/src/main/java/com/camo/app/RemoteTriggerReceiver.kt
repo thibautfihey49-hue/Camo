@@ -17,9 +17,8 @@ class RemoteTriggerReceiver : BroadcastReceiver() {
         when (action) {
             "com.camo.app.START_STREAM" -> {
                 Log.d(TAG, "START_STREAM recu")
-                val serviceIntent = Intent(context, CameraStreamService::class.java).apply {
-                    action = CameraStreamService.ACTION_START
-                }
+                val serviceIntent = Intent(context, CameraStreamService::class.java)
+                serviceIntent.action = CameraStreamService.ACTION_START
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     context.startForegroundService(serviceIntent)
                 } else {
@@ -28,9 +27,8 @@ class RemoteTriggerReceiver : BroadcastReceiver() {
             }
             "com.camo.app.STOP_STREAM" -> {
                 Log.d(TAG, "STOP_STREAM recu")
-                val serviceIntent = Intent(context, CameraStreamService::class.java).apply {
-                    action = CameraStreamService.ACTION_STOP
-                }
+                val serviceIntent = Intent(context, CameraStreamService::class.java)
+                serviceIntent.action = CameraStreamService.ACTION_STOP
                 context.startService(serviceIntent)
             }
         }
