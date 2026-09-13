@@ -3,13 +3,6 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <!-- ✅ Permission pour lire l'IP -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -26,26 +19,5 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".RemoteTriggerReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.camo.app.START_STREAM" />
-                <action android:name="com.camo.app.STOP_STREAM" />
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name=".CameraStreamService"
-            android:foregroundServiceType="camera"
-            android:exported="false" />
-
-        <receiver
-            android:name=".BootReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
     </application>
 </manifest>

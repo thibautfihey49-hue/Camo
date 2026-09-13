@@ -3,69 +3,90 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
+    android:padding="40dp"
     android:gravity="center_horizontal"
-    android:background="#121212">
+    android:background="#0F0F0F">
 
     <TextView 
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
         android:text="📹 Camo" 
-        android:textSize="32sp" 
+        android:textSize="34sp" 
         android:textColor="#FFFFFF" 
-        android:layout_marginBottom="5dp"/>
-
-    <!-- ✅ IP AFFICHÉE EN HAUT -->
-    <TextView 
-        android:id="@+id/ipText"
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content"
-        android:text="📡 IP : Recherche..." 
-        android:textSize="18sp" 
-        android:textColor="#4CAF50" 
-        android:gravity="center"
-        android:padding="12dp" 
-        android:background="#1E1E1E" 
-        android:layout_marginBottom="25dp"/>
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold"/>
 
     <TextView 
-        android:id="@+id/statusText" 
-        android:layout_width="match_parent" 
+        android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
-        android:text="Initialisation..." 
-        android:textSize="15sp" 
-        android:textColor="#B0B0B0" 
-        android:gravity="center"
-        android:padding="20dp" 
-        android:background="#1E1E1E" 
-        android:layout_marginBottom="30dp"/>
-
-    <Button 
-        android:id="@+id/btnStart" 
-        android:layout_width="match_parent" 
-        android:layout_height="60dp"
-        android:text="🟢 Démarrer le streaming" 
-        android:backgroundTint="#4CAF50" 
-        android:textColor="#FFFFFF"
-        android:textSize="17sp" 
-        android:layout_marginBottom="12dp"/>
-
-    <Button 
-        android:id="@+id/btnStop" 
-        android:layout_width="match_parent" 
-        android:layout_height="60dp"
-        android:text="🔴 Arrêter" 
-        android:backgroundTint="#F44336" 
-        android:textColor="#FFFFFF" 
-        android:textSize="17sp"/>
-
-    <TextView 
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content"
-        android:text="\n📡 Commandes à distance :\nDémarrer : am broadcast -a com.camo.app.START_STREAM -p com.camo.app\nArrêter :  am broadcast -a com.camo.app.STOP_STREAM -p com.camo.app"
-        android:textSize="11sp" 
+        android:text="Comme VDO.Ninja" 
+        android:textSize="16sp" 
         android:textColor="#666666" 
-        android:gravity="center" 
-        android:layout_marginTop="25dp"/>
+        android:layout_marginBottom="45dp"/>
+
+    <!-- LE CODE — EN GRAND -->
+    <TextView 
+        android:id="@+id/codeText"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="🔑 bleu-soleil-42" 
+        android:textSize="26sp" 
+        android:textColor="#00FF88" 
+        android:gravity="center"
+        android:paddingVertical="25dp"
+        android:background="#1A1A1A"
+        android:layout_marginBottom="35dp"
+        android:textStyle="bold"/>
+
+    <TextView 
+        android:id="@+id/statusText"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="1. Clique sur Démarrer\n2. Partage le code\n3. L'autre entre le code sur vdo.ninja" 
+        android:textSize="15sp" 
+        android:textColor="#AAAAAA" 
+        android:gravity="center"
+        android:layout_marginBottom="40dp"
+        android:lineSpacingExtra="6dp"/>
+
+    <Button 
+        android:id="@+id/btnStart"
+        android:layout_width="match_parent" 
+        android:layout_height="65dp"
+        android:text="📹 DÉMARRER MA CAMÉRA" 
+        android:backgroundTint="#00C853" 
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" 
+        android:layout_marginBottom="15dp"
+        android:textStyle="bold"/>
+
+    <Button 
+        android:id="@+id/btnCopy"
+        android:layout_width="match_parent" 
+        android:layout_height="55dp"
+        android:text="📋 COPIER LE CODE" 
+        android:backgroundTint="#2196F3" 
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" 
+        android:layout_marginBottom="15dp"/>
+
+    <Button 
+        android:id="@+id/btnWatch"
+        android:layout_width="match_parent" 
+        android:layout_height="55dp"
+        android:text="📺 VOIR LA VIDÉO" 
+        android:backgroundTint="#7B1FA2" 
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"/>
+
+    <TextView 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="\n💡 Partage ce code :\nvdo.ninja/?room=bleu-soleil-42\n→ Pas de compte, pas d'inscription, instantané !"
+        android:textSize="13sp" 
+        android:textColor="#555555" 
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:lineSpacingExtra="4dp"/>
 
 </LinearLayout>

@@ -1,9 +1,5 @@
 pluginManagement {
-    repositories {
-        mavenCentral()
-        google()
-        gradlePluginPortal()
-    }
+    repositories { mavenCentral() google() gradlePluginPortal() }
 }
 rootProject.name = "Camo"
 include ':app'

@@ -1,94 +1,92 @@
 package com.camo.app
 
 import android.Manifest
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.wifi.WifiManager
-import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import java.net.Inet4Address
-import java.net.NetworkInterface
-import java.util.Collections
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
-    private val REQUEST_PERMISSIONS = 100
+    private lateinit var codeText: TextView
     private lateinit var statusText: TextView
-    private lateinit var ipText: TextView
+    private var roomCode = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
+
+        codeText = findViewById(R.id.codeText)
         statusText = findViewById(R.id.statusText)
-        ipText = findViewById(R.id.ipText)
-        
-        // ✅ Affiche l'IP dès l'ouverture
-        ipText.text = "📡 IP : ${getLocalIPAddress()}"
-        
         val btnStart: Button = findViewById(R.id.btnStart)
-        val btnStop: Button = findViewById(R.id.btnStop)
+        val btnCopy: Button = findViewById(R.id.btnCopy)
+        val btnWatch: Button = findViewById(R.id.btnWatch)
+
+        // Génère un code unique dès l'ouverture
+        roomCode = genererCode()
+        codeText.text = "🔑 $roomCode"
 
         btnStart.setOnClickListener {
-            if (checkPermissions()) {
-                sendBroadcast(Intent("com.camo.app.START_STREAM"))
-                val ip = getLocalIPAddress()
-                statusText.text = "✅ DÉMARRÉ !\n\n🌐 Ouvre dans un navigateur :\nhttp://$ip:8080"
+            if (verifierPermission()) {
+                ouvrirCamera()
             } else {
-                requestPermissions()
+                demanderPermission()
             }
         }
 
-        btnStop.setOnClickListener {
-            sendBroadcast(Intent("com.camo.app.STOP_STREAM"))
-            statusText.text = "⏹️ ARRÊTÉ"
+        btnCopy.setOnClickListener {
+            copierCode()
         }
 
-        if (!checkPermissions()) {
-            requestPermissions()
-        } else {
-            val ip = getLocalIPAddress()
-            statusText.text = "✅ PRÊT !\n\n🌐 Flux disponible sur :\nhttp://$ip:8080"
+        btnWatch.setOnClickListener {
+            ouvrirVisionneur()
         }
     }
 
-    // ✅ FONCTION : RÉCUPÈRE L'IP LOCALE
-    private fun getLocalIPAddress(): String {
-        try {
-            val interfaces = Collections.list(NetworkInterface.getNetworkInterfaces())
-            for (netInterface in interfaces) {
-                val addrs = Collections.list(netInterface.inetAddresses)
-                for (addr in addrs) {
-                    if (!addr.isLoopbackAddress && addr is Inet4Address) {
-                        return addr.hostAddress
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            return "Inconnue"
-        }
-        return "127.0.0.1"
+    // Génère un code simple comme VDO.Ninja
+    private fun genererCode(): String {
+        val mots = listOf("bleu", "soleil", "lune", "vent", "mer", "neige", "feu", "roche", "nuage", "riviere")
+        val mot1 = mots.random()
+        val mot2 = mots.random()
+        val chiffres = (10..99).random()
+        return "$mot1-$mot2-$chiffres"
     }
 
-    private fun checkPermissions(): Boolean {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) return false
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) return false
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE) != PackageManager.PERMISSION_GRANTED) return false
-        }
-        return true
+    // Ouvre la caméra dans VDO.Ninja avec le code
+    private fun ouvrirCamera() {
+        val url = "https://vdo.ninja/?room=$roomCode&push&label=Camera"
+        val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url))
+        startActivity(intent)
+        statusText.text = "✅ Caméra en ligne !\nPartage ce code : $roomCode"
     }
 
-    private fun requestPermissions() {
-        ActivityCompat.requestPermissions(this, arrayOf(
-            Manifest.permission.CAMERA,
-            Manifest.permission.INTERNET,
-            Manifest.permission.FOREGROUND_SERVICE,
-            Manifest.permission.RECEIVE_BOOT_COMPLETED
-        ), REQUEST_PERMISSIONS)
+    // Ouvre la page pour REGARDER
+    private fun ouvrirVisionneur() {
+        val url = "https://vdo.ninja/?room=$roomCode&view"
+        val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url))
+        startActivity(intent)
+    }
+
+    // Copie le code dans le presse-papiers
+    private fun copierCode() {
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("Code", roomCode)
+        clipboard.setPrimaryClip(clip)
+        Toast.makeText(this, "✅ Code copié ! Partage-le !", Toast.LENGTH_LONG).show()
+    }
+
+    private fun verifierPermission(): Boolean {
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == android.content.pm.PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun demanderPermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 100)
     }
 }
