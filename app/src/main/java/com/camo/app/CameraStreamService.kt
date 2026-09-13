@@ -163,11 +163,11 @@ class CameraStreamService : Service() {
         try {
             val output = client.getOutputStream()
             output.write("HTTP/1.0 200 OK\r\n".toByteArray())
-            output.write(("Content-Type: multipart/x-mixed-replace; boundary=$boundary\r\n\r\n").toByteArray())
+            output.write(("Content-Type: multipart/x-mixed-replace; boundary=" + boundary + "\r\n\r\n").toByteArray())
             while (isRunning.get() && !client.isClosed) {
                 val frame = synchronized(framesLock) { frames.lastOrNull() }
                 if (frame != null) {
-                    output.write("--$boundary\r\n".toByteArray())
+                    output.write("--" + boundary + "\r\n".toByteArray())
                     output.write("Content-Type: image/jpeg\r\n".toByteArray())
                     output.write(("Content-Length: " + frame.size + "\r\n\r\n").toByteArray())
                     output.write(frame)
@@ -176,7 +176,7 @@ class CameraStreamService : Service() {
                 Thread.sleep(100)
             }
         } catch (e: Exception) {}
-        finally { try { client.close() } catch (ignored) {} }
+        finally { try { client.close() } catch (ignored: Exception) {} }
     }
 
     override fun onBind(intent: Intent?): IBinder? {
