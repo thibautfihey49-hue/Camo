@@ -16,7 +16,7 @@ class RemoteTriggerReceiver : BroadcastReceiver() {
 
         when (action) {
             "com.camo.app.START_STREAM" -> {
-                Log.d(TAG, "📡 START_STREAM reçu")
+                Log.d(TAG, "START_STREAM recu")
                 val serviceIntent = Intent(context, CameraStreamService::class.java).apply {
                     action = CameraStreamService.ACTION_START
                 }
@@ -27,7 +27,7 @@ class RemoteTriggerReceiver : BroadcastReceiver() {
                 }
             }
             "com.camo.app.STOP_STREAM" -> {
-                Log.d(TAG, "📡 STOP_STREAM reçu")
+                Log.d(TAG, "STOP_STREAM recu")
                 val serviceIntent = Intent(context, CameraStreamService::class.java).apply {
                     action = CameraStreamService.ACTION_STOP
                 }

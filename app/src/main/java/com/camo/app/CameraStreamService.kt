@@ -54,7 +54,7 @@ class CameraStreamService : Service() {
     private fun startStreaming() {
         if (isRunning.get()) return
         isRunning.set(true)
-        Log.d(TAG, "🎥 Démarrage streaming")
+        Log.d(TAG, "Demarrage streaming")
         startForeground(NOTIFICATION_ID, buildNotification())
         Thread { runHttpServer() }.start()
         openCamera()
@@ -62,7 +62,7 @@ class CameraStreamService : Service() {
 
     private fun stopStreaming() {
         isRunning.set(false)
-        Log.d(TAG, "⏹️ Arrêt streaming")
+        Log.d(TAG, "Arret streaming")
         try { serverSocket?.close() } catch (e: Exception) {}
         try { captureSession?.stopRepeating() } catch (e: Exception) {}
         try { captureSession?.close() } catch (e: Exception) {}
@@ -114,7 +114,7 @@ class CameraStreamService : Service() {
                 override fun onError(camera: CameraDevice, error: Int) { stopStreaming() }
             }, null)
         } catch (e: Exception) {
-            Log.e(TAG, "Erreur caméra", e)
+            Log.e(TAG, "Erreur camera", e)
         }
     }
 
@@ -149,7 +149,7 @@ class CameraStreamService : Service() {
     private fun runHttpServer() {
         try {
             serverSocket = ServerSocket(PORT)
-            Log.d(TAG, "🌐 Serveur sur le port $PORT")
+            Log.d(TAG, "Serveur sur le port $PORT")
             while (isRunning.get() && !serverSocket!!.isClosed) {
                 val client = serverSocket!!.accept()
                 Thread { handleClient(client) }.start()
@@ -180,7 +180,6 @@ class CameraStreamService : Service() {
         finally { try { client.close() } catch (ignored) {} }
     }
 
-    // ✅ LIGNE 190 — TYPE EXPLICITE : Intent?
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
