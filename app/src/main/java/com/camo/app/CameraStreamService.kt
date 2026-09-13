@@ -17,6 +17,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import java.net.ServerSocket
 import java.net.Socket
+import java.nio.charset.StandardCharsets
 import java.util.concurrent.atomic.AtomicBoolean
 
 class CameraStreamService : Service() {
@@ -162,16 +163,16 @@ class CameraStreamService : Service() {
         val boundary = "frame_" + System.currentTimeMillis()
         try {
             val output = client.getOutputStream()
-            output.write("HTTP/1.0 200 OK\r\n".toByteArray())
-            output.write(("Content-Type: multipart/x-mixed-replace; boundary=" + boundary + "\r\n\r\n").toByteArray())
+            output.write("HTTP/1.0 200 OK\r\n".toByteArray(StandardCharsets.UTF_8))
+            output.write(("Content-Type: multipart/x-mixed-replace; boundary=$boundary\r\n\r\n").toByteArray(StandardCharsets.UTF_8))
             while (isRunning.get() && !client.isClosed) {
                 val frame = synchronized(framesLock) { frames.lastOrNull() }
                 if (frame != null) {
-                    output.write("--" + boundary + "\r\n".toByteArray())
-                    output.write("Content-Type: image/jpeg\r\n".toByteArray())
-                    output.write(("Content-Length: " + frame.size + "\r\n\r\n").toByteArray())
+                    output.write("--$boundary\r\n".toByteArray(StandardCharsets.UTF_8))
+                    output.write("Content-Type: image/jpeg\r\n".toByteArray(StandardCharsets.UTF_8))
+                    output.write("Content-Length: ${frame.size}\r\n\r\n".toByteArray(StandardCharsets.UTF_8))
                     output.write(frame)
-                    output.write("\r\n".toByteArray())
+                    output.write("\r\n".toByteArray(StandardCharsets.UTF_8))
                 }
                 Thread.sleep(100)
             }
