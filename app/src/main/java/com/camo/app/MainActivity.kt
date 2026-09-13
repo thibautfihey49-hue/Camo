@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         btnStart.setOnClickListener {
             if (checkPermissions()) {
                 sendBroadcast(Intent("com.camo.app.START_STREAM"))
-                statusText.text = "✅ Démarré\nFlux: http://[IP]:8080"
+                statusText.text = "✅ Démarré !\nFlux: http://[IP]:8080"
             } else {
                 requestPermissions()
             }
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         if (!checkPermissions()) {
             requestPermissions()
         } else {
-            statusText.text = "✅ Prêt\nDéclenchement à distance actif"
+            statusText.text = "✅ Prêt !\nDéclenchement à distance actif"
         }
     }
 

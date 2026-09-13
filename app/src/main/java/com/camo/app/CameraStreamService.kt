@@ -80,10 +80,7 @@ class CameraStreamService : Service() {
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID, "Camo Service", NotificationManager.IMPORTANCE_LOW)
-            channel.setShowBadge(false)
-            channel.enableVibration(false)
-            channel.setSound(null, null)
+            val channel = NotificationChannel(CHANNEL_ID, "Camo Service", NotificationManager.IMPORTANCE_DEFAULT)
             val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             nm.createNotificationChannel(channel)
         }
@@ -91,11 +88,10 @@ class CameraStreamService : Service() {
 
     private fun buildNotification(): Notification {
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("")
-            .setContentText("")
+            .setContentTitle("Camo Streaming")
+            .setContentText("Actif sur le port 8080")
             .setSmallIcon(android.R.drawable.ic_menu_camera)
-            .setPriority(NotificationCompat.PRIORITY_MIN)
-            .setSilent(true)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setOngoing(true)
             .build()
     }

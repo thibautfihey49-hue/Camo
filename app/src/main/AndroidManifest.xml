@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -10,11 +11,18 @@
     <application
         android:allowBackup="true"
         android:label="Camo"
+        android:icon="@android:drawable/ic_menu_camera"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 
+        <!-- ✅ ACTIVITÉ VISIBLE DANS LE LANCEUR -->
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <receiver
             android:name=".RemoteTriggerReceiver"
